@@ -48,7 +48,7 @@ function App() {
       <BackgroundAnimation />
       <header className="App-header">
         <h1>SentryCode</h1>
-        <p>Empowering A Safer World Through Intelligent Software.</p>
+        <p>Intelligent Software for a Safer World.</p>
         <button className="App-cta" onClick={handleOpenModal}>
           Click to Connect
         </button>
