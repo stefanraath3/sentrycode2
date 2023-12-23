@@ -1,4 +1,3 @@
-// src/BackgroundAnimation.js
 import React, { useEffect, useRef } from "react";
 import "./BackgroundAnimation.css";
 
@@ -8,19 +7,21 @@ const BackgroundAnimation = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const dotDensity = 0.00007; // Adjust this value as needed
+    const dots = [];
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      populateDots();
+    };
 
-    let animationFrameId;
-
-    // Dot properties
     class Dot {
       constructor(x, y) {
         this.x = x;
         this.y = y;
         this.radius = Math.random() * 2;
-        this.vx = (Math.random() - 0.5) * 1;
-        this.vy = (Math.random() - 0.5) * 1;
+        this.vx = Math.random() - 0.5;
+        this.vy = Math.random() - 0.5;
       }
 
       draw(ctx) {
@@ -38,16 +39,19 @@ const BackgroundAnimation = () => {
       }
     }
 
-    // Create dots
-    const dots = [];
-    for (let i = 0; i < 100; i++) {
-      const x = Math.random() * canvas.width;
-      const y = Math.random() * canvas.height;
-      dots.push(new Dot(x, y));
-    }
+    const populateDots = () => {
+      const numberOfDots = Math.floor(
+        dotDensity * canvas.width * canvas.height
+      );
+      dots.length = 0; // Clear existing dots
+      for (let i = 0; i < numberOfDots; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        dots.push(new Dot(x, y));
+      }
+    };
 
-    // Connect dots with lines
-    const connectDots = (dots) => {
+    const connectDots = () => {
       for (let i = 0; i < dots.length; i++) {
         for (let j = i; j < dots.length; j++) {
           const dx = dots[i].x - dots[j].x;
@@ -66,31 +70,24 @@ const BackgroundAnimation = () => {
       }
     };
 
-    // Animation loop
     const animate = () => {
       context.clearRect(0, 0, canvas.width, canvas.height);
       dots.forEach((dot) => {
         dot.update();
         dot.draw(context);
       });
-      connectDots(dots);
-      animationFrameId = requestAnimationFrame(animate);
+      connectDots();
+      requestAnimationFrame(animate);
     };
 
-    // Start animation
-    animate();
-
-    // Handle resizing
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    window.addEventListener("resize", resize);
+    // Initialize canvas and dots
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+    requestAnimationFrame(animate);
 
     // Cleanup function
     return () => {
-      window.cancelAnimationFrame(animationFrameId);
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", resizeCanvas);
     };
   }, []);
 
