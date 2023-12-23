@@ -7,11 +7,16 @@ const BackgroundAnimation = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
+    const devicePixelRatio = window.devicePixelRatio || 1; // Get the device pixel ratio
     const dotDensity = 0.00007; // Adjust this value as needed
     const dots = [];
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      // Adjust the canvas size for the device pixel ratio
+      canvas.width = window.innerWidth * devicePixelRatio;
+      canvas.height = window.innerHeight * devicePixelRatio;
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      context.scale(devicePixelRatio, devicePixelRatio); // Scale the context to ensure crisp lines
       populateDots();
     };
 
