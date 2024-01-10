@@ -48,7 +48,10 @@ function App() {
       <BackgroundAnimation />
       <header className="App-header">
         <h1>SentryCode</h1>
-        <p>Redefining Global Security with Advanced Intelligence</p>
+        <p>
+          Beyond Data:
+          <span className="futuristic-highlight"> Intelligence Redefined</span>
+        </p>
         <button className="App-cta" onClick={handleOpenModal}>
           Click to Connect
         </button>

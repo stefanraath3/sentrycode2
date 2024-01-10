@@ -35,3 +35,24 @@
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0, 118, 255, 0.23);
 }
+
+/* App.css */
+@keyframes highlight-fade-in {
+  from {
+    background-size: 300% 300%;
+    opacity: 0;
+  }
+  to {
+    background-size: 100% 100%;
+    opacity: 1;
+  }
+}
+
+.futuristic-highlight {
+  animation: highlight-fade-in 2s ease forwards;
+  background: linear-gradient(45deg, #00ffe7, #00fffd, #00ffab, #00ff80);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  display: inline;
+}
