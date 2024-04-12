@@ -4,6 +4,7 @@ import "./App.css";
 import BackgroundAnimation from "./BackgroundAnimation";
 import ContactModal from "./ContactModal";
 import { supabase } from "./supabaseClient";
+import Logo from "./Logo"; // Import the Logo component
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -47,10 +48,11 @@ function App() {
     <div className="App">
       <BackgroundAnimation />
       <header className="App-header">
+        <Logo /> {/* Display the Logo component */}
         <h1>SentryCode</h1>
         <p>
           Beyond Data:
-          <span className="futuristic-highlight"> Intelligence Redefined</span>
+          <span> Intelligence Redefined</span>
         </p>
         <button className="App-cta" onClick={handleOpenModal}>
           Click to Connect

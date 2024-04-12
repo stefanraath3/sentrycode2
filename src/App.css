@@ -56,3 +56,8 @@
   color: transparent;
   display: inline;
 }
+
+.logo-image {
+  width: 280px; /* Adjust width as needed */
+  height: auto; /* Maintain aspect ratio */
+}
