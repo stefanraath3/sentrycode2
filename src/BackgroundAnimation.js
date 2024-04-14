@@ -49,9 +49,18 @@ const BackgroundAnimation = () => {
         dotDensity * canvas.width * canvas.height
       );
       dots.length = 0; // Clear existing dots
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      const exclusionRadius = 300; // Radius around the center where no dots should be placed
       for (let i = 0; i < numberOfDots; i++) {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
+        let x, y, distance;
+        do {
+          x = Math.random() * canvas.width;
+          y = Math.random() * canvas.height;
+          distance = Math.sqrt(
+            Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)
+          );
+        } while (distance < exclusionRadius);
         dots.push(new Dot(x, y));
       }
     };

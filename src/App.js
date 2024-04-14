@@ -1,7 +1,6 @@
 // src/App.js
 import React, { useState } from "react";
 import "./App.css";
-import BackgroundAnimation from "./BackgroundAnimation";
 import ContactModal from "./ContactModal";
 import { supabase } from "./supabaseClient";
 import Logo from "./Logo"; // Import the Logo component
@@ -46,7 +45,6 @@ function App() {
   };
   return (
     <div className="App">
-      <BackgroundAnimation />
       <header className="App-header">
         <Logo /> {/* Display the Logo component */}
         <h1>SentryCode</h1>
